@@ -1,0 +1,43 @@
+#include <iostream>
+#include<queue>
+using namespace std;
+void bfs(vector<int> adj[],int v,int source)
+{	//cout<<"hello";
+	queue<int> q;
+	vector<bool> visited(v);
+	q.push(source);
+	visited[source]=true;
+	while(q.empty()==false)
+	{	//cout<<"hi";
+		int current=q.front();
+		q.pop();
+		cout<<current<<" ";
+		for(int a:adj[current])
+		{
+			//cout<<"for";
+			if(visited[a]==false)
+			{
+				q.push(a);
+				visited[a]=true;
+			}
+		}
+	}
+	
+}
+int main() {
+	int v=4;
+	//cin>>v;
+	vector<int> adj[v];
+	adj[0].push_back(1);
+	adj[0].push_back(2);
+	adj[1].push_back(0);
+	adj[1].push_back(2);
+	adj[1].push_back(3);
+	adj[2].push_back(0);
+	adj[2].push_back(1);
+	adj[2].push_back(3);
+	adj[3].push_back(1);
+	adj[3].push_back(2);
+	bfs(adj,v,0);
+	return 0;
+}
