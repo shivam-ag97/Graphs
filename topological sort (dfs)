@@ -1,0 +1,36 @@
+void topo_util(vector<int> adj[],bool vis[],int source,stack<int>& s)
+{  
+    vis[source]=true;
+    vector<int>::iterator i; 
+    for (i=adj[source].begin(); i!=adj[source].end(); ++i)
+    {  
+        if(vis[*i]==false)
+        topo_util(adj,vis,*i,s);
+    }
+    
+    s.push(source);
+    
+}
+
+int* topoSort(int V, vector<int> adj[])
+{
+    bool vis[V];
+    static int result[50];
+    stack<int> s;
+    for(int i=0;i<V;i++)
+   { 
+       vis[i]=false;
+   }
+    
+    for(int i=0;i<V;i++)
+    if(!vis[i])
+     topo_util(adj,vis,i,s);
+     
+     int k=0;
+     while(!s.empty())
+     {
+         result[k++]=s.top();
+            s.pop();
+     }
+    return result;
+}
