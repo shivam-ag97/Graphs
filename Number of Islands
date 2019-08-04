@@ -1,0 +1,53 @@
+int c=0;
+void count_island(vector<int> A[], int N, int M, bool vis[100][100],int row,int column)
+{
+    if(A[row][column]==0||vis[row][column]==true)
+    return;
+    
+    vis[row][column]=true;
+    
+    if(row-1>=0 && column-1>=0)
+    {count_island(A,N,M,vis,row-1,column-1);}
+    if(row-1>=0)
+    count_island(A,N,M,vis,row-1,column);
+    if(row-1>=0 && column+1<M)
+    count_island(A,N,M,vis,row-1,column+1);
+    if(column-1>=0)
+    count_island(A,N,M,vis,row,column-1);
+    if(column+1<M)
+    count_island(A,N,M,vis,row,column+1);
+    if(row+1<N && column-1>=0)
+    count_island(A,N,M,vis,row+1,column-1);
+    if(row+1<N)
+    count_island(A,N,M,vis,row+1,column);
+    if(row+1<N && column+1<M)
+    count_island(A,N,M,vis,row+1,column+1);
+    
+    
+    
+}
+int findIslands(vector<int> A[], int N, int M)
+{
+ c=0;
+ bool vis[100][100];
+  for(int i=0;i<N;i++)
+     {
+         for(int j=0;j<M;j++)
+         {vis[i][j]=false;
+         //cout<<vis[i][j]<<" ";
+         }
+         //cout<<"\n";
+     }
+   
+    
+ for(int i=0;i<N;i++)
+    {
+        for(int j=0;j<M;j++)
+        if(vis[i][j]==false && A[i][j]==1)
+        {
+            count_island(A,N,M,vis,i,j);
+            c++;
+        }
+    }
+return c;
+}
